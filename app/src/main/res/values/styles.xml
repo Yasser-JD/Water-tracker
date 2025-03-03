@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <!-- changed one time -->
+<resources>
+    <!-- Reusable Dimensions -->
+    <dimen name="corner_radius_default">12dp</dimen>
+    <dimen name="corner_radius_large">16dp</dimen>
+    <dimen name="padding_vertical_default">12dp</dimen>
+    <dimen name="padding_content_default">16dp</dimen>
+    <dimen name="text_size_default">16sp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="elevation_default">4dp</dimen>
+
+    <!-- Reusable Colors -->
+    <color name="color_primary">@color/primary</color>
+    <color name="color_white">@color/white</color>
+    <color name="color_error">@color/error</color>
+    <color name="color_text_hint">@color/text_hint</color>
+
+    <!-- Base Button Style -->
+    <style name="Widget.WaterTracker.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">@color/color_white</item>
+        <item name="backgroundTint">@color/color_primary</item>
+        <item name="cornerRadius">@dimen/corner_radius_default</item>
+        <item name="android:paddingTop">@dimen/padding_vertical_default</item>
+        <item name="android:paddingBottom">@dimen/padding_vertical_default</item>
+        <item name="android:textSize">@dimen/text_size_default</item>
+    </style>
+
+    <!-- White Button Style -->
+    <style name="Widget.WaterTracker.Button.White" parent="Widget.WaterTracker.Button">
+        <item name="android:textColor">@color/color_primary</item>
+        <item name="backgroundTint">@color/color_white</item>
+    </style>
+
+    <!-- Outlined Button Style -->
+    <style name="Widget.WaterTracker.Button.Outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">@color/color_primary</item>
+        <item name="strokeColor">@color/color_primary</item>
+        <item name="cornerRadius">@dimen/corner_radius_default</item>
+        <item name="android:paddingTop">@dimen/padding_vertical_default</item>
+        <item name="android:paddingBottom">@dimen/padding_vertical_default</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+
+    <!-- Danger Outlined Button Style -->
+    <style name="Widget.WaterTracker.Button.Outlined.Danger">
+        <item name="android:textColor">@color/color_error</item>
+        <item name="strokeColor">@color/color_error</item>
+    </style>
+    
+    <!-- Text Button Style -->
+    <style name="Widget.WaterTracker.Button.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/color_primary</item>
+        <item name="android:textSize">@dimen/text_size_default</item>
+    </style>
+
+    <!-- Progress Circle Style -->
+    <style name="Widget.WaterTracker.ProgressCircle" parent="Widget.AppCompat.ProgressBar">
+        <item name="android:indeterminateTint">@color/color_primary</item>
+    </style>
+
+    <!-- Input Field Style -->
+    <style name="Widget.WaterTracker.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/color_primary</item>
+        <item name="hintTextColor">@color/color_primary</item>
+        <item name="android:textColorHint">@color/color_text_hint</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/corner_radius_default</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/corner_radius_default</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/corner_radius_default</item>
+        <item name="boxCornerRadiusTopStart">@dimen/corner_radius_default</item>
+    </style>
+
+    <!-- Card View Style -->
+    <style name="Widget.WaterTracker.CardView" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">@dimen/corner_radius_large</item>
+        <item name="cardElevation">@dimen/elevation_default</item>
+        <item name="contentPadding">@dimen/padding_content_default</item>
+    </style>
+</resources>

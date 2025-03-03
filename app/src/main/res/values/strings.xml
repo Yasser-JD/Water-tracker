@@ -1,0 +1,114 @@
+<resources>
+    <string name="app_name">Water Tracker</string>
+    
+    <!-- Splash Screen -->
+    <string name="splash_loading">Loading…</string>
+    
+    <!-- Onboarding -->
+    <string name="onboarding_title_1">Stay Hydrated</string>
+    <string name="onboarding_desc_1">Track your daily water intake to maintain a healthy lifestyle.</string>
+    <string name="onboarding_title_2">Set Goals</string>
+    <string name="onboarding_desc_2">Create personalized hydration goals to match your needs.</string>
+    <string name="onboarding_title_3">Get Reminders</string>
+    <string name="onboarding_desc_3">Receive timely reminders to ensure you stay on track with your hydration goals.</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_get_started">Get Started</string>
+    
+    <!-- Authentication -->
+    <string name="auth_login">Login</string>
+    <string name="auth_register">Register</string>
+    <string name="auth_email">Email</string>
+    <string name="auth_password">Password</string>
+    <string name="auth_confirm_password">Confirm Password</string>
+    <string name="auth_username">Username</string>
+    <string name="auth_date_of_birth">Date of Birth</string>
+    <string name="auth_daily_goal">Daily Goal (ml)</string>
+    <string name="auth_sign_in">Sign In</string>
+    <string name="auth_create_account">Create Account</string>
+    <string name="auth_no_account">Don\'t have an account?</string>
+    <string name="auth_have_account">Already have an account?</string>
+    <string name="auth_register_now">Register Now</string>
+    <string name="auth_login_now">Login Now</string>
+    <string name="auth_age_warning">You must be at least 18 years old.</string>
+    <string name="auth_email_invalid">Please enter a valid email address.</string>
+    <string name="auth_password_weak">Password must be at least 6 characters.</string>
+    <string name="auth_invalid_email">Please enter a valid email address</string>
+    <string name="auth_invalid_password">Password must be at least 6 characters long</string>
+    <string name="auth_invalid_username">Please enter a username</string>
+    <string name="auth_invalid_date">Please select your date of birth</string>
+    <string name="auth_error">Authentication Error</string>
+    <string name="auth_success">Authentication Successful</string>
+    <string name="auth_field_required">This field is required</string>
+    <string name="auth_passwords_dont_match">Passwords don\'t match</string>
+    <string name="auth_email_exists">Email already exists</string>
+    <string name="auth_invalid_goal">Daily goal should be between 500 and 5000 ml</string>
+    <string name="auth_sign_in_with_google">Sign in with Google</string>
+    
+    <!-- Main Tabs -->
+    <string name="tab_dashboard">Dashboard</string>
+    <string name="tab_goals">Goals</string>
+    <string name="tab_tips">Tips</string>
+    <string name="tab_profile">Profile</string>
+    
+    <!-- Dashboard -->
+    <string name="dashboard_title">Today\'s Hydration</string>
+    <string name="dashboard_current_intake">Current intake</string>
+    <string name="dashboard_ml">ml</string>
+    <string name="dashboard_quick_add">Quick Add</string>
+    <string name="dashboard_add_200ml">200ml</string>
+    <string name="dashboard_add_350ml">350ml</string>
+    <string name="dashboard_add_500ml">500ml</string>
+    <string name="dashboard_add_custom">Add Custom Amount</string>
+    <string name="dashboard_today_history">Today\'s Intake History</string>
+    <string name="water_intake_icon_description">Water glass icon</string>
+    <string name="delete_intake_description">Delete intake entry</string>
+    
+    <!-- Goals -->
+    <string name="goals_title">Hydration Goals</string>
+    <string name="goals_current">Current Goal</string>
+    <string name="goals_edit">Edit Goal</string>
+    <string name="goals_recommendations">Recommendation</string>
+    <string name="goals_recommended_text">Based on your profile, we recommend a daily intake of 2000ml (8 glasses) of water for optimal hydration.</string>
+    <string name="goals_use_recommended">Use Recommended</string>
+    <string name="goals_history">Goal History</string>
+    <string name="goals_previous">Previous</string>
+    <string name="goals_set_new">Set New Goal</string>
+    <string name="goals_save">Save Goal</string>
+    
+    <!-- Tips -->
+    <string name="tips_title">Hydration Tips</string>
+    <string name="tips_subtitle">Learn how to maintain healthy hydration habits</string>
+    <string name="tips_read_more">Read More</string>
+    <string name="tip_image_description">Hydration tip image</string>
+    
+    <!-- Profile -->
+    <string name="profile_title">My Profile</string>
+    <string name="profile_edit">Edit Profile</string>
+    <string name="profile_settings">Settings</string>
+    <string name="profile_notifications">Notifications</string>
+    <string name="profile_theme">Theme</string>
+    <string name="profile_language">Language</string>
+    <string name="profile_about">About</string>
+    <string name="profile_logout">Logout</string>
+    <string name="profile_save_changes">Save Changes</string>
+    <string name="profile_image_description">Profile photo</string>
+    <string name="notifications_description">Notifications icon</string>
+    <string name="language_description">Language icon</string>
+    <string name="theme_description">Theme icon</string>
+    <string name="about_description">Information icon</string>
+    <string name="arrow_right_description">Right arrow</string>
+    <string name="language_english">English</string>
+    <string name="theme_light">Light</string>
+    
+    <!-- Notifications -->
+    <string name="notification_title">Time to Hydrate!</string>
+    <string name="notification_message">Don\'t forget to drink water and stay hydrated.</string>
+    <string name="notification_reminder_title">Water Reminder</string>
+    <string name="notification_channel_description">Reminders to stay hydrated</string>
+    
+    <!-- Common -->
+    <string name="error_general">Something went wrong. Please try again.</string>
+    <string name="success">Success!</string>
+    <string name="ok">OK</string>
+</resources>
