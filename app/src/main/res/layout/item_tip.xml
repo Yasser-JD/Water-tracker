@@ -25,7 +25,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/backgrounds/scenic" />
+            tools:src="@drawable/stayhydrated" />
 
         <TextView
             android:id="@+id/tip_category"
@@ -38,12 +38,13 @@
             android:paddingTop="4dp"
             android:paddingEnd="12dp"
             android:paddingBottom="4dp"
+            android:text="@string/health_benefits"
             android:textColor="@color/text_primary"
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tip_image"
-            tools:text="Health Benefits" />
+             />
 
         <TextView
             android:id="@+id/tip_title"
@@ -52,13 +53,14 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="16dp"
+            android:text="@string/stay_hydrated_during_workouts"
             android:textColor="@color/text_primary"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tip_category"
-            tools:text="Stay Hydrated During Workouts" />
+            />
 
         <TextView
             android:id="@+id/tip_content"
@@ -68,13 +70,14 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
+            android:text="@string/drinking_water_before_during_and_after_your_workout"
             android:textColor="@color/text_secondary"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/read_more_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tip_title"
-            tools:text="Drinking water before, during, and after your workout helps maintain your energy levels and improve performance..." />
+             />
 
         <Button
             android:id="@+id/read_more_button"

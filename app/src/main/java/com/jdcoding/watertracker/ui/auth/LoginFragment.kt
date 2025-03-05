@@ -152,7 +152,7 @@ class LoginFragment : Fragment() {
                     // Sign in success, update UI with the signed-in user's information
                     val user = auth.currentUser
                     // Create or update user in your database
-                    authViewModel.handleGoogleSignIn(user?.email ?: "", user?.displayName ?: "")
+                    authViewModel.handleGoogleSignIn(idToken)
                     navigateToMainActivity()
                 } else {
                     // If sign in fails, display a message to the user.

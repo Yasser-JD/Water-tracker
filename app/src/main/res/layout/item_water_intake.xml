@@ -22,11 +22,12 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:contentDescription="@string/water_intake_icon_description"
+            android:src="@drawable/ic_water_glass"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/primary"
-            tools:src="@drawable/ic_water_glass" />
+            />
 
         <TextView
             android:id="@+id/intake_amount"
@@ -34,11 +35,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:textColor="@color/text_primary"
+            android:text="250 ml"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/intake_icon"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="250 ml" />
+            />
 
         <TextView
             android:id="@+id/intake_time"

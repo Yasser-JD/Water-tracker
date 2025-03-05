@@ -5,22 +5,27 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import com.jdcoding.watertracker.data.WaterTrackerRepository
 import com.jdcoding.watertracker.model.User
 import com.jdcoding.watertracker.utils.SessionManager
 import com.jdcoding.watertracker.utils.ValidationUtils
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import java.util.Date
 import java.util.UUID
 
 /**
- * ViewModel for handling authentication operations
+ * ViewModel for handling authentication operations using Firebase Auth
  */
 class AuthViewModel(
     private val repository: WaterTrackerRepository,
     private val sessionManager: SessionManager
 ) : ViewModel() {
 
+    private val auth = FirebaseAuth.getInstance()
+    
     private val _registrationStatus = MutableLiveData<RegistrationResult>()
     val registrationStatus: LiveData<RegistrationResult> = _registrationStatus
 
@@ -28,7 +33,7 @@ class AuthViewModel(
     val loginStatus: LiveData<LoginResult> = _loginStatus
 
     /**
-     * Attempts to register a new user
+     * Attempts to register a new user using Firebase Auth
      */
     fun registerUser(
         username: String,
@@ -58,30 +63,32 @@ class AuthViewModel(
                 }
             }
 
-            // Check if email already exists
-            val emailExists = repository.checkEmailExists(email)
-            if (emailExists) {
-                _registrationStatus.value = RegistrationResult.EmailAlreadyExists
-                return@launch
-            }
-
-            // Create and insert new user
-            val newUser = User(
-                username = username,
-                email = email,
-                password = password, // In a real app, hash this before storage
-                dateOfBirth = dateOfBirth,
-                dailyWaterGoal = 2000, // Default: 2000ml
-                createdAt = Date()
-            )
-
             try {
-                val userId = repository.insertUser(newUser)
+                // Create Firebase Auth user
+                val authResult = auth.createUserWithEmailAndPassword(email, password).await()
+                val firebaseUser = authResult.user
                 
-                // Auto-login after successful registration
-                sessionManager.createLoginSession(userId, username, email)
-                
-                _registrationStatus.value = RegistrationResult.Success(userId)
+                if (firebaseUser != null) {
+                    // Create and insert new user in local database
+                    val newUser = User(
+                        id = firebaseUser.uid.hashCode().toLong(),
+                        username = username,
+                        email = email,
+                        password = "", // Don't store password locally
+                        dateOfBirth = dateOfBirth,
+                        dailyWaterGoal = 2000, // Default: 2000ml
+                        createdAt = Date()
+                    )
+
+                    repository.insertUser(newUser)
+                    
+                    // Create session
+                    sessionManager.createLoginSession(newUser.id, username, email)
+                    
+                    _registrationStatus.value = RegistrationResult.Success(newUser.id)
+                } else {
+                    _registrationStatus.value = RegistrationResult.Error("Failed to create user")
+                }
             } catch (e: Exception) {
                 _registrationStatus.value = RegistrationResult.Error(e.message ?: "Registration failed")
             }
@@ -89,7 +96,7 @@ class AuthViewModel(
     }
 
     /**
-     * Attempts to log in a user
+     * Attempts to log in a user using Firebase Auth
      */
     fun loginUser(email: String, password: String) {
         viewModelScope.launch {
@@ -106,13 +113,21 @@ class AuthViewModel(
             }
 
             try {
-                // Attempt to find user with matching credentials
-                val user = repository.getUserByEmailAndPassword(email, password)
+                // Sign in with Firebase
+                val authResult = auth.signInWithEmailAndPassword(email, password).await()
+                val firebaseUser = authResult.user
                 
-                if (user != null) {
-                    // Create session
-                    sessionManager.createLoginSession(user.id, user.username, user.email)
-                    _loginStatus.value = LoginResult.Success(user.id)
+                if (firebaseUser != null) {
+                    // Get user from local database
+                    val user = repository.getUserByEmail(email)
+                    
+                    if (user != null) {
+                        // Create session
+                        sessionManager.createLoginSession(user.id, user.username, user.email)
+                        _loginStatus.value = LoginResult.Success(user.id)
+                    } else {
+                        _loginStatus.value = LoginResult.Error("User not found in local database")
+                    }
                 } else {
                     _loginStatus.value = LoginResult.InvalidCredentials
                 }
@@ -122,28 +137,41 @@ class AuthViewModel(
         }
     }
 
-    fun handleGoogleSignIn(email: String, displayName: String) {
+    fun handleGoogleSignIn(idToken: String) {
         viewModelScope.launch {
             try {
-                // Check if user exists
-                var user = repository.getUserByEmail(email)
-                if (user == null) {
-                    // Create new user
-                    user = User(
-                        id = UUID.randomUUID().toString(),
-                        email = email,
-                        password = "", // No password for OAuth users
-                        username = displayName,
-                        dateOfBirth = Date(),
-                        dailyWaterGoal = 2000 // Default daily goal
-                    )
-                    repository.insertUser(user)
+                // Get Firebase credentials from Google ID token
+                val credential = GoogleAuthProvider.getCredential(idToken, null)
+                
+                // Sign in with Firebase
+                val authResult = auth.signInWithCredential(credential).await()
+                val firebaseUser = authResult.user
+                
+                if (firebaseUser != null) {
+                    // Check if user exists in local database
+                    var user = repository.getUserByEmail(firebaseUser.email ?: "")
+                    
+                    if (user == null) {
+                        // Create new user in local database
+                        user = User(
+                            id = firebaseUser.uid.hashCode().toLong(),
+                            email = firebaseUser.email ?: "",
+                            password = "", // No password for OAuth users
+                            username = firebaseUser.displayName ?: "User",
+                            dateOfBirth = Date(),
+                            dailyWaterGoal = 2000 // Default daily goal
+                        )
+                        repository.insertUser(user)
+                    }
+                    
+                    // Save user session
+                    sessionManager.createLoginSession(user.id, user.username, user.email)
+                    _loginStatus.value = LoginResult.Success(user.id)
+                } else {
+                    _loginStatus.value = LoginResult.Error("Google Sign-In failed")
                 }
-                // Save user session
-                sessionManager.createLoginSession(user.id, user.username, user.email)
-                _loginStatus.value = LoginResult.Success(user.id)
             } catch (e: Exception) {
-                _loginStatus.value = LoginResult.Error(e.message ?: "Unknown error occurred")
+                _loginStatus.value = LoginResult.Error(e.message ?: "Google Sign-In failed")
             }
         }
     }
@@ -152,6 +180,7 @@ class AuthViewModel(
      * Logs out the current user
      */
     fun logout() {
+        auth.signOut()
         sessionManager.logout()
     }
 
@@ -159,7 +188,7 @@ class AuthViewModel(
      * Check if a user is currently logged in
      */
     fun isUserLoggedIn(): Boolean {
-        return sessionManager.isLoggedIn()
+        return auth.currentUser != null && sessionManager.isLoggedIn()
     }
 
     /**

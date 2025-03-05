@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("kotlin-kapt")
     id("com.google.gms.google-services")
+
 }
 
 android {
@@ -12,7 +13,7 @@ android {
     defaultConfig {
         applicationId = "com.jdcoding.watertracker"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -50,9 +51,18 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     
     // Google Auth
-    implementation(platform("com.google.firebase:firebase-bom:32.7.2"))
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.android.gms:play-services-auth:21.0.0")
+    // Import the Firebase BoM
+    implementation(platform("com.google.firebase:firebase-bom:33.10.0"))
+
+    // TODO: Add the dependencies for Firebase products you want to use
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation("com.google.firebase:firebase-analytics")
+
+
+    // Add the dependencies for any other desired Firebase products
+    // https://firebase.google.com/docs/android/setup#available-libraries
     
     // Splash Screen API
     implementation("androidx.core:core-splashscreen:1.0.1")
@@ -62,9 +72,9 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
     
     // Room Database
-    implementation("androidx.room:room-runtime:2.6.1")
-    implementation("androidx.room:room-ktx:2.6.1")
-    kapt("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-runtime:2.7.0-rc01")
+    implementation("androidx.room:room-ktx:2.7.0-rc01")
+    kapt("androidx.room:room-compiler:2.7.0-rc01")
     
     // WorkManager for background tasks
     implementation("androidx.work:work-runtime-ktx:2.9.0")
@@ -91,4 +101,12 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //Animation LottieFiles dependencies
+    implementation("com.airbnb.android:lottie:6.6.3")
+
+    // kotlinx-metadata-jvm
+    implementation("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.9.0")
+
+
 }

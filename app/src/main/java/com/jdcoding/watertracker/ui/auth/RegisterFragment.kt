@@ -134,35 +134,58 @@ class RegisterFragment : Fragment() {
                 .commit()
         }
     }
-    
+
     private fun showDatePicker() {
         val calendar = Calendar.getInstance()
-        
+
         // Default to 18 years ago
         calendar.add(Calendar.YEAR, -18)
-        
+
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
-        
+
         val datePickerDialog = DatePickerDialog(
             requireContext(),
             { _, selectedYear, selectedMonth, selectedDay ->
-                calendar.set(selectedYear, selectedMonth, selectedDay)
-                selectedDate = calendar.time
-                
-                // Format the date for display
-                val dateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
-                birthdateEditText.setText(dateFormat.format(selectedDate!!))
+                val selectedCalendar = Calendar.getInstance()
+                selectedCalendar.set(selectedYear, selectedMonth, selectedDay)
+                selectedDate = selectedCalendar.time
+
+                // Calculate age
+                val age = calculateAge(selectedCalendar)
+
+                if (age < 18) {
+                    birthdateLayout.error = getString(R.string.auth_underage_error) // Show error message
+                    registerButton.isEnabled = false // Disable registration button
+                } else {
+                    birthdateLayout.error = null // Clear error
+                    registerButton.isEnabled = true // Enable registration button
+
+                    // Format the date for display
+                    val dateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
+                    birthdateEditText.setText(dateFormat.format(selectedDate!!))
+                }
             },
             year, month, day
         )
-        
+
         // Set max date to today
         val today = Calendar.getInstance()
         datePickerDialog.datePicker.maxDate = today.timeInMillis
-        
+
         datePickerDialog.show()
+    }
+
+    private fun calculateAge(birthDate: Calendar): Int {
+        val today = Calendar.getInstance()
+        var age = today.get(Calendar.YEAR) - birthDate.get(Calendar.YEAR)
+
+        if (today.get(Calendar.DAY_OF_YEAR) < birthDate.get(Calendar.DAY_OF_YEAR)) {
+            age-- // If birthday hasn't occurred this year, reduce age by 1
+        }
+
+        return age
     }
     
     private fun validateInputs(): Boolean {

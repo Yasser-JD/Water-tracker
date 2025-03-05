@@ -111,4 +111,9 @@
     <string name="error_general">Something went wrong. Please try again.</string>
     <string name="success">Success!</string>
     <string name="ok">OK</string>
+    <string name="default_web_client_id">966811629160-e4vb7s55er927ct1gni84d0f84s8pjh0.apps.googleusercontent.com</string>
+    <string name="health_benefits">Health Benefits</string>
+    <string name="stay_hydrated_during_workouts">Stay Hydrated During Workouts</string>
+    <string name="drinking_water_before_during_and_after_your_workout">Drinking water before, during, and after your workout helps maintain your energy levels and improve performance...</string>
+    <string name="auth_underage_error">You must be +18 to register, Thanks from Y-JD</string>
 </resources>
