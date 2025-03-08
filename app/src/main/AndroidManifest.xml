@@ -33,7 +33,8 @@
         <activity
             android:name=".ui.auth.AuthActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.WaterTracker.NoActionBar" />
             
         <activity
             android:name=".ui.main.MainActivity"
