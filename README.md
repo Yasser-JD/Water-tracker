@@ -70,3 +70,43 @@ WaterTracker follows the **MVVM (Model-View-ViewModel)** architecture pattern:
 1. **Clone the repository**
    ```bash
    git clone https://github.com/yourusername/WaterTracker.git
+
+## 🏗️ Getting Started
+
+### 📥 Installation
+1. **Open the project** in Android Studio
+2. **Add your `google-services.json` file** to the `app/` directory  
+   - This file can be obtained from the **Firebase Console**
+   - **Package name**
+   - **SHA-1 fingerprint**
+3. **Build and run** the application
+
+---
+
+## 📸 Screenshots
+
+
+---
+
+## 🔮 Future Enhancements
+- ⏰ **Hydration reminders & notifications**
+- 📲 **Social sharing capabilities**
+- ➕ **Custom intake entry options**
+- 📈 **More detailed statistics and insights**
+- ☁️ **Cloud synchronization across devices**
+
+---
+
+## 📜 License
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 💙 Acknowledgements
+- **AAChartView** for charting library
+- **Firebase** for authentication services
+- **Material Components** for UI design
+
+---
+
+
